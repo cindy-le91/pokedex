@@ -24,7 +24,7 @@
   margin: 30px;
 }
 
-.search-inputs .home-buttons {
+.search-input {
   margin: auto;
   width: 50%;
 }
@@ -34,4 +34,16 @@ button {
   padding: 20px 30px;
   background-color: #c4ebe7;
   color: white;
+}
+
+.home-buttons {
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.display-none {
+  display: none;
 }
