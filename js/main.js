@@ -39,13 +39,6 @@ function changeViewToSearchedPokemon() {
     document.querySelector('.search-pokemon-moves').appendChild(li);
   }
 
-  // get abilities
-  // loop through abilities
-  // create li element
-  // set className
-  // set inner text
-  // query select for abilities ul
-  // appenchChild li to ul
 }
 
 function searchForPokemon() {
