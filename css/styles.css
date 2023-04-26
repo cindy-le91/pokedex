@@ -3,11 +3,11 @@
   padding: 5px;
   text-align: center;
   font-size: 30px;
+  font-family: Roboto, sans-serif;
 }
 
 .red {
   background-color: #fd6e6e;
-  height: 100vh;
 }
 
 #home {
@@ -24,14 +24,8 @@
   margin: 30px;
 }
 
-.search-input {
-  margin: auto;
-  width: 50%;
-}
-
 button {
-  margin-top: 50px;
-  padding: 20px 30px;
+  padding: 10px 20px;
   background-color: #c4ebe7;
   color: white;
 }
@@ -46,4 +40,12 @@ button {
 
 .display-none {
   display: none;
+}
+
+h3 {
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
 }
