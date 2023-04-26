@@ -45,3 +45,7 @@ h3 {
 .title {
   font-size: 20px;
 }
+
+svg {
+  margin-bottom: 50px;
+}
