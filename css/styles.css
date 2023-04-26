@@ -1,0 +1,47 @@
+.green {
+  background-color: #c4ebe7;
+  padding: 5px;
+  text-align: center;
+  font-size: 30px;
+  font-family: Roboto, sans-serif;
+}
+
+.red {
+  background-color: #fd6e6e;
+}
+
+#home {
+  width: 100vw;
+  height: 45vh;
+  padding: 30px;
+}
+
+.second-row {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  padding-left: 100px;
+  background-color: white;
+  margin: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #c4ebe7;
+  color: white;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+h3 {
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+}
