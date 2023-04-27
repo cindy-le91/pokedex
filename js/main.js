@@ -1,6 +1,6 @@
 const searchButton = document.getElementById('search');
 let searchedPokemon = null;
-const searchPokemonName = 'pikachu';
+let searchPokemonName = null;
 let flavorText = '';
 
 searchButton.addEventListener('click', searchForPokemon);
@@ -42,6 +42,7 @@ function changeViewToSearchedPokemon() {
 }
 
 function searchForPokemon() {
+  searchPokemonName = document.getElementById('search-input').value;
   fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemonName}`)
     .then(response => response.json())
     .then(data => {
@@ -57,8 +58,23 @@ function getFlavorText() {
     .then(response => response.json())
     .then(data => {
       flavorText = data.flavor_text_entries[0].flavor_text;
-      document.querySelector('.flavorText').innerText = flavorText;
+      if (document.querySelector('.flavorText')) {
+        document.querySelector('.flavorText').innerText = flavorText;
+      }
     })
 
     .catch(error => console.error(error));
+}
+
+const star = document.getElementById('favorite');
+star.addEventListener('click', function () {
+  document.getElementById('favorite-path').setAttribute('fill', 'yellow');
+  data.team.push(searchedPokemon);
+});
+
+document.getElementById('team').addEventListener('click', changeViewToTeam);
+
+function changeViewToTeam() {
+  document.querySelector('.home').classList.add('display-none');
+  document.querySelector('.team-pokemon').classList.remove('display-none');
 }
