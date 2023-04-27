@@ -49,3 +49,12 @@ h3 {
 svg {
   margin-bottom: 50px;
 }
+
+.favorite-highlight {
+  background-color: yellow;
+}
+
+.individual {
+  border: 1px solid black;
+  text-align: center;
+}
