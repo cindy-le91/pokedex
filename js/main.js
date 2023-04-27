@@ -32,7 +32,7 @@ function changeViewToSearchedPokemon() {
   }
 
   const moves = searchedPokemon.moves;
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     const li = document.createElement('li');
     li.className = 'list-group-item';
     li.innerText = `${moves[i].move.name}`;
@@ -77,4 +77,16 @@ document.getElementById('team').addEventListener('click', changeViewToTeam);
 function changeViewToTeam() {
   document.querySelector('.home').classList.add('display-none');
   document.querySelector('.team-pokemon').classList.remove('display-none');
+}
+
+for (const index in data.team) {
+  const pokemon = data.team[index];
+  const div = document.createElement('div');
+  div.className = 'col individual';
+
+  const image = document.createElement('img');
+  image.setAttribute('src', pokemon.sprites.front_default);
+  div.appendChild(image);
+
+  document.querySelector('.team-container').appendChild(div);
 }
