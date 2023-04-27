@@ -2,9 +2,6 @@ const searchButton = document.getElementById('search');
 let searchedPokemon = null;
 let searchPokemonName = null;
 let flavorText = '';
-const team = [
-
-];
 
 searchButton.addEventListener('click', searchForPokemon);
 
@@ -72,7 +69,7 @@ function getFlavorText() {
 const star = document.getElementById('favorite');
 star.addEventListener('click', function () {
   document.getElementById('favorite-path').setAttribute('fill', 'yellow');
-  team.push(searchedPokemon);
+  data.team.push(searchedPokemon);
 });
 
 document.getElementById('team').addEventListener('click', changeViewToTeam);
@@ -80,5 +77,4 @@ document.getElementById('team').addEventListener('click', changeViewToTeam);
 function changeViewToTeam() {
   document.querySelector('.home').classList.add('display-none');
   document.querySelector('.team-pokemon').classList.remove('display-none');
-
 }
