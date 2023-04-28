@@ -83,7 +83,10 @@ for (const index in data.team) {
   const pokemon = data.team[index];
   const div = document.createElement('div');
   div.className = 'col individual';
-
+  div.addEventListener('click', function () {
+    searchedPokemon = data.team[index];
+    changeViewToSearchedPokemon();
+  });
   const image = document.createElement('img');
   image.setAttribute('src', pokemon.sprites.front_default);
   div.appendChild(image);
