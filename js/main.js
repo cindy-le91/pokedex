@@ -6,6 +6,7 @@ let flavorText = '';
 searchButton.addEventListener('click', searchForPokemon);
 
 function changeViewToSearchedPokemon() {
+
   document.querySelector('.home').classList.add('display-none');
   document.querySelector('.search-pokemon').classList.remove('display-none');
 
@@ -49,6 +50,7 @@ function searchForPokemon() {
       searchedPokemon = data;
     })
     .then(data => { getFlavorText(); })
+    .then(data => { resetSearchedPokemon(); })
     .then(data => { changeViewToSearchedPokemon(); })
     .catch(error => console.error(error));
 }
@@ -76,20 +78,57 @@ document.getElementById('team').addEventListener('click', changeViewToTeam);
 
 function changeViewToTeam() {
   document.querySelector('.home').classList.add('display-none');
+  document.querySelector('.search-pokemon').classList.add('display-none');
   document.querySelector('.team-pokemon').classList.remove('display-none');
+  document.querySelector('.go-back').classList.remove('display-none');
+
+  const removeButtons = [...document.querySelectorAll('.remove-in-team-view')];
+  for (const index in removeButtons) {
+    if (removeButtons[index]) {
+      removeButtons[index].classList.add('display-none');
+    }
+  }
+  const items = [...document.getElementsByClassName('individual')];
+  for (const i in items) {
+    if (items[i]) {
+      items[i].remove();
+    }
+  }
+  for (const index in data.team) {
+    const pokemon = data.team[index];
+    const div = document.createElement('div');
+    div.className = 'col individual';
+    div.addEventListener('click', function () {
+      searchedPokemon = data.team[index];
+      changeViewToSearchedPokemon();
+    });
+    const image = document.createElement('img');
+    image.setAttribute('src', pokemon.sprites.front_default);
+    div.appendChild(image);
+
+    document.querySelector('.team-container').appendChild(div);
+  }
 }
 
-for (const index in data.team) {
-  const pokemon = data.team[index];
-  const div = document.createElement('div');
-  div.className = 'col individual';
-  div.addEventListener('click', function () {
-    searchedPokemon = data.team[index];
-    changeViewToSearchedPokemon();
-  });
-  const image = document.createElement('img');
-  image.setAttribute('src', pokemon.sprites.front_default);
-  div.appendChild(image);
-
-  document.querySelector('.team-container').appendChild(div);
+function resetSearchedPokemon() {
+  const items = [...document.getElementsByClassName('list-group-item')];
+  for (const i in items) {
+    if (items[i]) {
+      items[i].remove();
+    }
+  }
+  const star = document.getElementById('favorite-path');
+  star.removeAttribute('fill');
 }
+const back = document.querySelector('.go-back');
+back.addEventListener('click', function () {
+  document.querySelector('.home').classList.remove('display-none');
+  document.querySelector('.team-pokemon').classList.add('display-none');
+  const removeButtons = [...document.querySelectorAll('.remove-in-team-view')];
+  for (const index in removeButtons) {
+    if (removeButtons[index]) {
+      removeButtons[index].classList.remove('display-none');
+    }
+  }
+  document.querySelector('.go-back').classList.add('display-none');
+});
