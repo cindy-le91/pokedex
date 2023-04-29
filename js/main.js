@@ -1,6 +1,6 @@
 const searchButton = document.getElementById('search');
 let searchedPokemon = null;
-let searchPokemonName = null;
+let searchPokemonName = 'pikachu';
 let flavorText = '';
 
 searchButton.addEventListener('click', searchForPokemon);
@@ -100,6 +100,7 @@ function changeViewToTeam() {
     div.className = 'col individual';
     div.addEventListener('click', function () {
       searchedPokemon = data.team[index];
+      resetSearchedPokemon();
       changeViewToSearchedPokemon();
     });
     const image = document.createElement('img');
@@ -108,6 +109,7 @@ function changeViewToTeam() {
 
     document.querySelector('.team-container').appendChild(div);
   }
+
 }
 
 function resetSearchedPokemon() {
@@ -132,3 +134,18 @@ back.addEventListener('click', function () {
   }
   document.querySelector('.go-back').classList.add('display-none');
 });
+
+const togglePic = document.querySelector('.toggle-pic');
+togglePic.addEventListener('click', function () {
+  showFrontImg = !showFrontImg;
+  if (showFrontImg) {
+    const frontShinyDefault = searchedPokemon.sprites.other['official-artwork'].front_shiny;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontShinyDefault);
+  } else {
+    const frontDefaultSprite = searchedPokemon.sprites.other['official-artwork'].front_default;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontDefaultSprite);
+
+  }
+});
+
+let showFrontImg = true;
