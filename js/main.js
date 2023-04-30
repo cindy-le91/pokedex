@@ -1,5 +1,5 @@
 const searchButton = document.getElementById('search');
-let searchedPokemon = null;
+let searchedPokemon = data.searchedPokemon;
 let searchPokemonName = 'pikachu';
 let flavorText = '';
 
@@ -7,8 +7,10 @@ searchButton.addEventListener('click', searchForPokemon);
 if (data.pageView === 'team') {
   changeViewToTeam();
 }
+if (data.pageView === 'pokemon') {
+  changeViewToSearchedPokemon();
+}
 function changeViewToSearchedPokemon() {
-// change view to pokemon
   data.pageView = 'pokemon';
   document.querySelector('.home').classList.add('display-none');
   document.querySelector('.search-pokemon').classList.remove('display-none');
@@ -54,8 +56,9 @@ function searchForPokemon() {
   searchPokemonName = document.getElementById('search-input').value;
   fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemonName}`)
     .then(response => response.json())
-    .then(data => {
-      searchedPokemon = data;
+    .then(response => {
+      searchedPokemon = response;
+      data.searchedPokemon = searchedPokemon;
     })
     .then(data => { getFlavorText(); })
     .then(data => { resetSearchedPokemon(); })
@@ -132,6 +135,7 @@ function resetSearchedPokemon() {
   star.removeAttribute('fill');
 }
 const back = document.querySelector('.go-back');
+data.pageView = 'main';
 back.addEventListener('click', function () {
   document.querySelector('.home').classList.remove('display-none');
   document.querySelector('.team-pokemon').classList.add('display-none');
