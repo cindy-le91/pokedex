@@ -62,3 +62,8 @@ svg {
 .team-pokemon {
   margin-right: 1.5rem;
 }
+
+.toggle-pic {
+  text-align: center;
+  color: green;
+}

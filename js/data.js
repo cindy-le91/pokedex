@@ -1,15 +1,17 @@
 
 var data = {
-  team: []
+  team: [],
+  showFrontImgDefault: true,
+  pageView: 'main',
+  searchedPokemon: null
 };
-
 window.addEventListener('beforeunload', function (event) {
-  const team = JSON.stringify(data);
-  localStorage.setItem('local-storage', team);
+  const dataJson = JSON.stringify(data);
+  localStorage.setItem('local-storage', dataJson);
 });
 
-const team = localStorage.getItem('local-storage');
+const dataJson = localStorage.getItem('local-storage');
 
-if (team !== 'null') {
-  data = JSON.parse(team);
+if (dataJson !== 'null') {
+  data = JSON.parse(dataJson);
 }

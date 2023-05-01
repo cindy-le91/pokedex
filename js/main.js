@@ -1,17 +1,27 @@
 const searchButton = document.getElementById('search');
-let searchedPokemon = null;
-let searchPokemonName = null;
+let searchedPokemon = data.searchedPokemon;
+let searchPokemonName = 'pikachu';
 let flavorText = '';
 
 searchButton.addEventListener('click', searchForPokemon);
-
+if (data.pageView === 'team') {
+  changeViewToTeam();
+}
+if (data.pageView === 'pokemon') {
+  changeViewToSearchedPokemon();
+}
 function changeViewToSearchedPokemon() {
-
+  data.pageView = 'pokemon';
   document.querySelector('.home').classList.add('display-none');
   document.querySelector('.search-pokemon').classList.remove('display-none');
 
-  const frontDefaultSprite = searchedPokemon.sprites.other['official-artwork'].front_default;
-  document.querySelector('.searched-pokemon-image').setAttribute('src', frontDefaultSprite);
+  if (data.showFrontImgDefault) {
+    const frontShinyDefault = searchedPokemon.sprites.other['official-artwork'].front_shiny;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontShinyDefault);
+  } else {
+    const frontDefaultSprite = searchedPokemon.sprites.other['official-artwork'].front_default;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontDefaultSprite);
+  }
 
   const pokemonName = searchedPokemon.name;
   document.getElementById('pokemon-name').textContent = pokemonName;
@@ -46,8 +56,9 @@ function searchForPokemon() {
   searchPokemonName = document.getElementById('search-input').value;
   fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemonName}`)
     .then(response => response.json())
-    .then(data => {
-      searchedPokemon = data;
+    .then(response => {
+      searchedPokemon = response;
+      data.searchedPokemon = searchedPokemon;
     })
     .then(data => { getFlavorText(); })
     .then(data => { resetSearchedPokemon(); })
@@ -81,6 +92,7 @@ function changeViewToTeam() {
   document.querySelector('.search-pokemon').classList.add('display-none');
   document.querySelector('.team-pokemon').classList.remove('display-none');
   document.querySelector('.go-back').classList.remove('display-none');
+  data.pageView = 'team';
 
   const removeButtons = [...document.querySelectorAll('.remove-in-team-view')];
   for (const index in removeButtons) {
@@ -100,6 +112,7 @@ function changeViewToTeam() {
     div.className = 'col individual';
     div.addEventListener('click', function () {
       searchedPokemon = data.team[index];
+      resetSearchedPokemon();
       changeViewToSearchedPokemon();
     });
     const image = document.createElement('img');
@@ -108,6 +121,7 @@ function changeViewToTeam() {
 
     document.querySelector('.team-container').appendChild(div);
   }
+
 }
 
 function resetSearchedPokemon() {
@@ -121,6 +135,7 @@ function resetSearchedPokemon() {
   star.removeAttribute('fill');
 }
 const back = document.querySelector('.go-back');
+data.pageView = 'main';
 back.addEventListener('click', function () {
   document.querySelector('.home').classList.remove('display-none');
   document.querySelector('.team-pokemon').classList.add('display-none');
@@ -131,4 +146,18 @@ back.addEventListener('click', function () {
     }
   }
   document.querySelector('.go-back').classList.add('display-none');
+});
+
+const togglePic = document.querySelector('.toggle-pic');
+togglePic.addEventListener('click', function () {
+
+  data.showFrontImgDefault = !data.showFrontImgDefault;
+
+  if (data.showFrontImgDefault) {
+    const frontShinyDefault = searchedPokemon.sprites.other['official-artwork'].front_shiny;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontShinyDefault);
+  } else {
+    const frontDefaultSprite = searchedPokemon.sprites.other['official-artwork'].front_default;
+    document.querySelector('.searched-pokemon-image').setAttribute('src', frontDefaultSprite);
+  }
 });
