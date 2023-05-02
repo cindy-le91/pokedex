@@ -26,7 +26,9 @@ function changeViewToSearchedPokemon() {
   }
 
   const pokemonName = searchedPokemon.name;
-  document.getElementById('pokemon-name').textContent = pokemonName;
+  const word = pokemonName;
+  const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
+  document.getElementById('pokemon-name').textContent = capitalized;
 
   const stats = searchedPokemon.stats;
   for (const index in stats) {
@@ -125,7 +127,7 @@ function changeViewToTeam() {
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('target-id', pokemon.id);
     deleteBtn.className = 'delete-btn';
-    deleteBtn.innerText = 'remove';
+    deleteBtn.innerText = '-';
     deleteBtn.classList.add('btn');
     deleteBtn.classList.add('btn-primary');
     deleteBtn.setAttribute('type', 'button');
@@ -195,6 +197,9 @@ function deleteTeam(event) {
     data.team.splice(index, 1);
   }
 
+  changeViewToTeam();
+  // $('#Modal').modal('hide');
+  document.getElementById('modal').style.visibility = 'hidden';
 }
 
 deleteTeam();
