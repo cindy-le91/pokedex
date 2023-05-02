@@ -185,16 +185,15 @@ function deleteTeam(event) {
 
   let index = null;
   for (let i = 0; i < data.team.length; i++) {
-
     if (parseInt(deletePokemonId) === parseInt(data.team[i].id)) {
       index = i;
     }
   }
-  if (index) {
+  if (index >= 0) {
+    const removeDiv = document.querySelector(`[target-id="${deletePokemonId}"]`);
+    removeDiv.remove();
     data.team.splice(index, 1);
   }
-  // const removeDiv = document.querySelector()
-  // div.remove();
 
 }
 
