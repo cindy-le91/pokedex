@@ -65,5 +65,9 @@ svg {
 
 .toggle-pic {
   text-align: center;
-  color: green;
+  color: #c4ebe7;
+}
+
+ul {
+  list-style-type: none;
 }
