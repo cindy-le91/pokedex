@@ -126,13 +126,31 @@ function changeViewToTeam() {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('target-id', pokemon.id);
-    deleteBtn.className = 'delete-btn';
-    deleteBtn.innerText = '-';
+    deleteBtn.className = 'btn-danger';
     deleteBtn.classList.add('btn');
-    deleteBtn.classList.add('btn-primary');
+    deleteBtn.classList.add('btn-sm');
+
     deleteBtn.setAttribute('type', 'button');
     deleteBtn.setAttribute('data-bs-toggle', 'modal');
     deleteBtn.setAttribute('data-bs-target', '#modal');
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '16');
+    svg.setAttribute('height', '16');
+    svg.setAttribute('fill', 'currentColor');
+    svg.setAttribute('class', 'bi bi-x-circle');
+    svg.setAttribute('viewBox', '0 0 16 16');
+
+    const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path1.setAttribute('d', 'M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z');
+
+    const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path2.setAttribute('d', 'M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z');
+
+    svg.appendChild(path1);
+    svg.appendChild(path2);
+
+    deleteBtn.appendChild(svg);
 
     div.appendChild(deleteBtn);
 
@@ -183,6 +201,7 @@ togglePic.addEventListener('click', function () {
   }
 });
 
+// eslint-disable-next-line no-unused-vars
 function deleteTeam(event) {
 
   let index = null;
@@ -198,8 +217,5 @@ function deleteTeam(event) {
   }
 
   changeViewToTeam();
-  // $('#Modal').modal('hide');
   document.getElementById('modal').style.visibility = 'hidden';
 }
-
-deleteTeam();

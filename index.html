@@ -64,7 +64,7 @@
                   </div>
                   <div class="col">
                     <ul class="list-group-flush search-pokemon-moves">
-                      <li class=" title">Moves</li>
+                      <li class="title">Moves</li>
                     </ul>
                   </div>
                 </div>
@@ -93,11 +93,15 @@
         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-6 team-container-bottom">
 
         </div>
-        <div class="search-input"><input id="search-input" type="text" placeholder="search pokémon" class="remove-in-team-view"></div>
-        <div class="home-buttons">
-          <button id="search" type="submit" class="remove-in-team-view">SEARCH</button>
-          <button id="team" type="button" class="remove-in-team-view">TEAM</button>
-          <button id="go-back" type="submit" class="go-back display-none">BACK</button>
+        <div class="remove-in-team-view" style="display:flex; justify-content:center">
+          <div>
+            <div class="search-input"><input id="search-input" type="text" placeholder="Enter Pokémon Name" ></div>
+            <div class="home-buttons">
+              <button id="search" type="submit" class="remove-in-team-view">SEARCH</button>
+              <button id="team" type="button" class="remove-in-team-view">TEAM</button>
+              <button id="go-back" type="submit" class="go-back display-none">BACK</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +117,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-outline-success" onclick="deleteTeam(event)">Confirm</button>
+          <button type="button" class="btn btn-outline-success" onclick="deleteTeam(event)" data-bs-dismiss="modal">Confirm</button>
         </div>
       </div>
     </div>
