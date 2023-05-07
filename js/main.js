@@ -1,7 +1,6 @@
 const searchButton = document.getElementById('search');
 let searchedPokemon = data.searchedPokemon;
 let searchPokemonName = '';
-let flavorText = '';
 let deletePokemonId = null;
 
 searchButton.addEventListener('click', searchForPokemon);
@@ -59,27 +58,13 @@ function changeViewToSearchedPokemon() {
 function searchForPokemon() {
   searchPokemonName = document.getElementById('search-input').value;
   fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemonName}`)
-    .then(response => response.json())
+    .then(function (response) { return response.json(); })
     .then(response => {
       searchedPokemon = response;
       data.searchedPokemon = searchedPokemon;
     })
-    .then(data => { getFlavorText(); })
     .then(data => { resetSearchedPokemon(); })
     .then(data => { changeViewToSearchedPokemon(); })
-    .catch(error => console.error(error));
-}
-
-function getFlavorText() {
-  fetch(searchedPokemon.species.url)
-    .then(response => response.json())
-    .then(data => {
-      flavorText = data.flavor_text_entries[0].flavor_text;
-      if (document.querySelector('.flavorText')) {
-        document.querySelector('.flavorText').innerText = flavorText;
-      }
-    })
-
     .catch(error => console.error(error));
 }
 
@@ -93,6 +78,7 @@ document.getElementById('team').addEventListener('click', changeViewToTeam);
 
 function changeViewToTeam() {
   document.querySelector('.home').classList.add('display-none');
+  document.getElementById('search-input').classList.add('display-none');
   document.querySelector('.search-pokemon').classList.add('display-none');
   document.querySelector('.team-pokemon').classList.remove('display-none');
   document.querySelector('.go-back').classList.remove('display-none');
@@ -149,6 +135,7 @@ function changeViewToTeam() {
 
     svg.appendChild(path1);
     svg.appendChild(path2);
+    svg.style['pointer-events'] = 'none';
 
     deleteBtn.appendChild(svg);
 
@@ -157,6 +144,8 @@ function changeViewToTeam() {
     document.querySelector('.team-container').appendChild(div);
 
     deleteBtn.addEventListener('click', function (event) {
+      document.getElementById('modal').style.visibility = 'visible';
+
       deletePokemonId = event.target.getAttribute('target-id');
     });
   }
@@ -178,6 +167,9 @@ data.pageView = 'main';
 back.addEventListener('click', function () {
   document.querySelector('.home').classList.remove('display-none');
   document.querySelector('.team-pokemon').classList.add('display-none');
+  document.querySelector('.search-pokemon').classList.add('display-none');
+  document.getElementById('search-input').classList.remove('display-none');
+
   const removeButtons = [...document.querySelectorAll('.remove-in-team-view')];
   for (const index in removeButtons) {
     if (removeButtons[index]) {
@@ -210,10 +202,13 @@ function deleteTeam(event) {
       index = i;
     }
   }
+
   if (index >= 0) {
     const removeDiv = document.querySelector(`[target-id="${deletePokemonId}"]`);
-    removeDiv.remove();
-    data.team.splice(index, 1);
+    if (removeDiv) {
+      removeDiv.remove();
+      data.team.splice(index, 1);
+    }
   }
 
   changeViewToTeam();
