@@ -2,8 +2,9 @@
   background-color: #c4ebe7;
   padding: 5px;
   text-align: center;
-  font-size: 30px;
-  font-family: Roboto, sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  font-family: "Chakra Petch", sans-serif;
 }
 
 .red {
@@ -12,7 +13,7 @@
 
 #home {
   width: 100%;
-  height: 45vh;
+  height: 60vh;
   padding: 30px;
 }
 
@@ -40,14 +41,12 @@ button {
 
 h3 {
   text-align: center;
+  font-family: "Chakra Petch", sans-serif;
 }
 
 .title {
-  font-size: 20px;
-}
-
-svg {
-  margin-bottom: 50px;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .favorite-highlight {
@@ -65,5 +64,39 @@ svg {
 
 .toggle-pic {
   text-align: center;
-  color: green;
+  color: #fd6e6e;
+}
+
+ul {
+  list-style-type: none;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 22px;
+}
+
+#pokemon-name {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  font-family: "Chakra Petch", sans-serif;
+}
+
+#search {
+  border-radius: 5px;
+}
+
+#team {
+  border-radius: 5px;
+}
+
+#search-input {
+  border-radius: 5px;
+  margin-bottom: 25px;
+  width: 200px;
+  height: 40px;
+}
+
+#go-back {
+  border-radius: 5px;
 }
