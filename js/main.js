@@ -165,6 +165,7 @@ function resetSearchedPokemon() {
 const back = document.querySelector('.go-back');
 data.pageView = 'main';
 back.addEventListener('click', function () {
+  document.getElementById('search-input').value = null;
   document.querySelector('.home').classList.remove('display-none');
   document.querySelector('.team-pokemon').classList.add('display-none');
   document.querySelector('.search-pokemon').classList.add('display-none');
