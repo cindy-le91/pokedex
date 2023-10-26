@@ -56,16 +56,20 @@ function changeViewToSearchedPokemon() {
 }
 
 function searchForPokemon() {
+  displaySpinner();
+
   searchPokemonName = document.getElementById('search-input').value;
+
   fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemonName}`)
-    .then(function (response) { return response.json(); })
+    .then(function (response) { hideError(); return response.json(); })
     .then(response => {
       searchedPokemon = response;
       data.searchedPokemon = searchedPokemon;
     })
     .then(data => { resetSearchedPokemon(); })
     .then(data => { changeViewToSearchedPokemon(); })
-    .catch(error => console.error(error));
+    .then(data => { hideSpinner(); })
+    .catch(error => { console.error(error); hideSpinner(); displayError(); });
 }
 
 const star = document.getElementById('favorite');
@@ -214,4 +218,18 @@ function deleteTeam(event) {
 
   changeViewToTeam();
   document.getElementById('modal').style.visibility = 'hidden';
+}
+
+function displaySpinner() {
+  document.getElementById('spinner-container').style.display = 'flex';
+}
+function hideSpinner() {
+  document.getElementById('spinner-container').style.display = 'none';
+}
+
+function displayError() {
+  document.getElementById('not-found').style.display = 'flex';
+}
+function hideError() {
+  document.getElementById('not-found').style.display = 'none';
 }
